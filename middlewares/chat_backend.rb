@@ -6,7 +6,7 @@ module WhisperModule
     KEEPALIVE_TIME = 15
 
     def initialize(app)
-      @comms_operator = CommsOperator.new()
+      @comms_operator = CommsOperator.new
       @app = app
       @clients = []
       @username_WSID_directory = []
@@ -15,15 +15,15 @@ module WhisperModule
     def call(env)
       if Faye::WebSocket.websocket?(env)
 
-        ws = Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME})
+        ws = Faye::WebSocket.new(env, nil, ping: KEEPALIVE_TIME)
 
-        ws.on :open do |event|
-          p "ws.object_id:", ws.object_id
+        ws.on :open do |_event|
+          p 'ws.object_id:', ws.object_id
           @clients << ws
         end
 
         ws.on :message do |event|
-          p "event.data:", event.data
+          p 'event.data:', event.data
           @clients.each { |client| client.send(event.data) }
         end
 

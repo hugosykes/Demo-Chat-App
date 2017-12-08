@@ -5,5 +5,6 @@ source 'https://rubygems.org' do
   gem 'faye'
   gem 'puma'
 
+  gem 'simplecov', :require => false, :group => :test
 
 end
