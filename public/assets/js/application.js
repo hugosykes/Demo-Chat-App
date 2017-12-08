@@ -3,10 +3,11 @@ $(document).ready(function() {
   var scheme = "ws://";
   var uri = scheme + window.document.location.host + '/';
   var ws = new WebSocket(uri);
+  var messages = [];
 
   ws.onmessage = function(message) {
     var data = JSON.parse(message.data);
-    $("#chat-text").append("<scan>Handle: " + data.handle + "<br>Message: " + data.text + "<br>");
+    $("#chat-text").append("<scan>" + data.handle + " says: " + data.text + "<br>");
   };
 
   function send() {
