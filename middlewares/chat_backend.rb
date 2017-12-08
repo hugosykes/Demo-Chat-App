@@ -1,4 +1,5 @@
 require 'faye/websocket'
+# require 'eventmachine'
 
 module ChatDemo
   class ChatBackend
@@ -12,6 +13,20 @@ module ChatDemo
     def call(env)
       if Faye::WebSocket.websocket?(env)
         # WebSockets logic goes here
+
+        # @channel = EventMachine::Channel.new
+
+        # Thread.new {
+        #   EventMachine.run {
+        #     @channel.subscribe { |url|
+        #       ws = Faye::WebSocket::Client.new(url)
+        #        def setup_socket(url)
+        #          @channel.push(url)
+        #        end
+        #     }
+        #   }
+        # }
+
 
         # we set ping parameter to ping a packet every 15 seconds because
         # after 55 seconds of idleness, Heroku will terminate the connection

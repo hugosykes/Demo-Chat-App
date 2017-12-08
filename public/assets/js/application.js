@@ -6,7 +6,7 @@ $(document).ready(function() {
 
   ws.onmessage = function(message) {
     var data = JSON.parse(message.data);
-    $("#chat-text").append("<scan>Handle: " + data.handle + "\nMessage: " + data.text + "");
+    $("#chat-text").append("<scan>Handle: " + data.handle + "<br>Message: " + data.text + "<br>");
   };
 
   function send() {
