@@ -33,12 +33,12 @@ module WhisperModule
         ws = Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME})
 
         ws.on :open do |event|
-          p [:open, ws.object_id]
+          p "ws.object_id:", ws.object_id
           @clients << ws
         end
 
         ws.on :message do |event|
-          p [:message, event.data]
+          p "event.data:", event.data
           @clients.each { |client| client.send(event.data) } # we broadcast the data (message) to each client
         end
 
