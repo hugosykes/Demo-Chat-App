@@ -1,8 +1,10 @@
 $(document).ready(function() {
+
+  var FayeWebSocket = require('faye-websocket');
     
-  var scheme = "ws://";
+  var scheme = "wss://";
   var uri = scheme + window.document.location.host + '/';
-  var ws = new WebSocket(uri);
+  var ws = new FayeWebSocket(uri);
   var messages = [];
 
   ws.onmessage = function(message) {
