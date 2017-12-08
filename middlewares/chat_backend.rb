@@ -1,8 +1,8 @@
 require 'faye/websocket'
 # require 'eventmachine'
 
-module ChatDemo
-  class ChatBackend
+module WhisperModule
+  class WhisperBackend
     KEEPALIVE_TIME = 15
 
     def initialize(app)

@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   ws.onmessage = function(message) {
     var data = JSON.parse(message.data);
-    $("#chat-text").append("<scan>" + data.handle + " says: " + data.text + "<br>");
+    $("#chat-text").append("<br><scan>" + data.handle + " says: " + data.text + "<br>");
   };
 
   function send() {
@@ -21,5 +21,9 @@ $(document).ready(function() {
     if (event.keyCode == '13') {
       send();
     }
+  });
+
+  $('#submit').click(function() {
+    send();
   });
 });

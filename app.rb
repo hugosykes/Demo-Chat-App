@@ -1,7 +1,7 @@
 require 'sinatra/base'
 
-module ChatDemo
-  class App < Sinatra::Base
+module WhisperModule
+  class Whisper < Sinatra::Base
     get '/' do
       erb :'index.html'
     end
