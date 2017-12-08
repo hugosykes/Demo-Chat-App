@@ -1,10 +1,8 @@
 $(document).ready(function() {
-
-  var FayeWebSocket = require('faye-websocket');
     
-  var scheme = "wss://";
+  var scheme = "ws://";
   var uri = scheme + window.document.location.host + '/';
-  var ws = new FayeWebSocket(uri);
+  var ws = new WebSocket(uri);
   var messages = [];
 
   ws.onmessage = function(message) {
@@ -17,7 +15,7 @@ $(document).ready(function() {
     var text = $("#input-text").val();
     ws.send(JSON.stringify({handle: handle, text: text }));
     $("#input-text").val('');
-  }
+  } 
 
   $('#input-text').keypress(function(event) {
     if (event.keyCode == '13') {
