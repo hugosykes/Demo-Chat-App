@@ -1,35 +1,20 @@
 require 'faye/websocket'
-# require 'eventmachine'
+require(File.expand_path('comms_operator.rb', File.dirname(__FILE__)))
 
 module WhisperModule
   class WhisperBackend
     KEEPALIVE_TIME = 15
 
     def initialize(app)
+      @comms_operator = CommsOperator.new()
       @app = app
       @clients = []
+      @username_WSID_directory = []
     end
 
     def call(env)
       if Faye::WebSocket.websocket?(env)
-        # WebSockets logic goes here
 
-        # @channel = EventMachine::Channel.new
-
-        # Thread.new {
-        #   EventMachine.run {
-        #     @channel.subscribe { |url|
-        #       ws = Faye::WebSocket::Client.new(url)
-        #        def setup_socket(url)
-        #          @channel.push(url)
-        #        end
-        #     }
-        #   }
-        # }
-
-
-        # we set ping parameter to ping a packet every 15 seconds because
-        # after 55 seconds of idleness, Heroku will terminate the connection
         ws = Faye::WebSocket.new(env, nil, {ping: KEEPALIVE_TIME})
 
         ws.on :open do |event|
@@ -39,7 +24,7 @@ module WhisperModule
 
         ws.on :message do |event|
           p "event.data:", event.data
-          @clients.each { |client| client.send(event.data) } # we broadcast the data (message) to each client
+          @clients.each { |client| client.send(event.data) }
         end
 
         ws.on :close do |event|
@@ -48,7 +33,6 @@ module WhisperModule
           ws = nil
         end
 
-        # Return async Rack response
         ws.rack_response
       else
         @app.call(env)
