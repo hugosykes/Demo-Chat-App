@@ -10,7 +10,7 @@
         null,
         null,
         null,
-        6,
+        5,
         1,
         null,
         1,
@@ -26,8 +26,8 @@
         1,
         null,
         null,
-        1,
-        1,
+        null,
+        null,
         null,
         null,
         1,
@@ -37,12 +37,13 @@
       ],
       "/Users/hugosykes/Makers/final-project/example-websocket-app/middlewares/comms_operator.rb": [
         1,
+        null,
         1,
-        5,
+        4,
         null,
         null,
         1,
-        1,
+        2,
         null,
         null,
         null,
@@ -54,12 +55,12 @@
         null,
         null,
         1,
-        2,
-        2,
+        1,
+        1,
         null,
         null
       ]
     },
-    "timestamp": 1513026150
+    "timestamp": 1513026494
   }
 }

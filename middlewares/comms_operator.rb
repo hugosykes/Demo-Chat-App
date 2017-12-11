@@ -1,4 +1,5 @@
 class CommsOperator
+
   def initialize(dir = [])
     @username_WSID_directory = dir
   end
@@ -17,6 +18,6 @@ class CommsOperator
 
   def check_genuine_message(json)
     parsed_json = JSON.parse(json)
-    return parsed_json['text'] != ""
+    add_username(parsed_json['senderName']) if parsed_json['text'] == ""
   end
 end

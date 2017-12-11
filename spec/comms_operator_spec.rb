@@ -22,7 +22,7 @@ describe CommsOperator do
     expect(subject.find_WSID('Chris')).to eq false
   end
 
-  it 'should check whether message is to set up user with WSID directory' do
-    expect(subject.check_genuine_message(json)).to eq false
+  it "should add user to WSID directory if message isn't 'genuine'" do
+    expect { subject.check_genuine_message(json) }.to change { username_WSID_directory.length }.by(1)
   end
 end
