@@ -21,11 +21,7 @@ $(document).ready(function() {
   }
 
   $('#input-text').keypress(function(event) {
-    // if (textSanitiser('#input-text') && event.keyCode == '13') {
-      send();
-    // } else {
-      // textSanitiseError();
-    // }
+    if (event.keyCode == '13') { send() }
   });
 
   $('#submit').click(function() {
