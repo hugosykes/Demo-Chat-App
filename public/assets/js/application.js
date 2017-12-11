@@ -15,7 +15,8 @@ $(document).ready(function() {
     var handle = $('#input-handle').val();
     var text = $("#input-text").val();
     ws.send(JSON.stringify({
-      handle: handle,
+      "senderName": handle,
+      "receiverName": handle,
       text: text
     }));
     $("#input-text").val('');
