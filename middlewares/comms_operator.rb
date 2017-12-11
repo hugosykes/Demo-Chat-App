@@ -33,7 +33,7 @@ class CommsOperator
     clients.each do |client|
       if ws_ids.include?(client.object_id)
         client.send(message)
-        p message
+        @username_WSID_directory.each { |user| p user[:name] if user[:WSID] == client.object_id }
       end
     end
   end
