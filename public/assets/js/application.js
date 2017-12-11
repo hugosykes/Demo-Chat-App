@@ -22,31 +22,31 @@ $(document).ready(function() {
   }
 
   $('#input-text').keypress(function(event) {
-    if (textSanitiser('#input-text') && event.keyCode == '13') {
+    // if (textSanitiser('#input-text') && event.keyCode == '13') {
       send();
-    } else {
-      textSanitiseError();
-    }
+    // } else {
+      // textSanitiseError();
+    // }
   });
 
   $('#submit').click(function() {
-    if (textSanitiser('#input-text')) {
+    // if (textSanitiser('#input-text')) {
       send();
-    } else {
-      textSanitiseError();
-    }
+    // } else {
+    //   textSanitiseError();
+    // }
   });
 
-  function textSanitiser(text_input) {
-    if (text_input.includes('<' || '>')) {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // function textSanitiser(text_input) {
+  //   if (text_input.includes('<' || '>')) {
+  //     return false;
+  //   } else {
+  //     return true;
+  //   }
+  // }
 
-  function textSanitiseError() {
-    $("#chat-text").append("<br><scan> Text input not valid. Remove symbols and try again.");
-  }
+  // function textSanitiseError() {
+  //   $("#chat-text").append("<br><scan> Text input not valid. Remove symbols and try again.");
+  // }
 
 });
