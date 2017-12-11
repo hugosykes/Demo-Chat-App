@@ -7,7 +7,7 @@ $(document).ready(function() {
 
   ws.onmessage = function(message) {
     var data = JSON.parse(message.data);
-    $("#chat-text").append("<br><scan>"+ data.senderName.slice(0,-12) + ' is saying ' + data.text + ' to ' + data.receiverName.slice(0,-12)+ '!');
+    $("#chat-text").append("<br><scan>"+ data.senderName + ' is saying ' + data.text + ' to ' + data.receiverName + '!');
   };
 
   function send() {
