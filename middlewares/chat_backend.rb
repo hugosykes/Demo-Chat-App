@@ -17,17 +17,17 @@ module WhisperModule
         ws = Faye::WebSocket.new(env, nil, ping: KEEPALIVE_TIME)
 
         ws.on :open do |event|
-          puts 'ws.object_id on open: ' + ws.object_id
+          p 'ws.object_id on open: ', ws.object_id
           @clients << ws
         end
 
         ws.on :message do |event|
-          puts 'event.data:', event.data
+          p 'event.data:', event.data
           @comms_operator.send_message_to_correct_recipient(@clients, event.data, ws.object_id)
         end
 
         ws.on :close do |event|
-          puts [:close, ws.object_id, event.code, event.reason].to_s
+          p [:close, ws.object_id, event.code, event.reason]
           @clients.delete(ws)
           ws = nil
         end
