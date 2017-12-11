@@ -6,8 +6,9 @@ $(document).ready(function() {
   var messages = [];
 
   ws.onmessage = function(message) {
-    var data = JSON.parse(message.data);
-    $("#chat-text").append("<br><scan>" + data);
+    console.log(message)
+    // var data = JSON.parse(message.data);
+    // $("#chat-text").append("<br><scan>" + data);
   };
 
   function send() {
