@@ -25,7 +25,7 @@ describe CommsOperator do
   end
 
   it 'adds new usernames to the username_WSID_directory' do
-    subject.add_username('Lucy')
+    subject.add_username('Lucy', nil)
     expect(username_WSID_directory.last[:name]).to eq 'Lucy'
   end
 
@@ -39,17 +39,17 @@ describe CommsOperator do
 
   it "should add user to WSID directory if message isn't 'genuine' (text != '')" do
     json = '{"senderName": "Lucy", "receiverName": "", "text":"", "error":false}'
-    expect { subject.check_genuine_message(json) }.to change { username_WSID_directory.length }.by(1)
+    expect { subject.check_genuine_message(json, nil) }.to change { username_WSID_directory.length }.by(1)
   end
 
   it "should report that the message is true if it has text" do
     json = '{"senderName": "Lucy", "receiverName": "", "text":"tarah!", "error":false}'  
-    expect(subject.check_genuine_message(json)).to eq true
+    expect(subject.check_genuine_message(json, nil)).to eq true
   end
 
   it 'should send message to Chris if senderName is Chris' do
     expect(ws_correct).to receive(:send)
-    subject.send_message_to_correct_recipient(clients, message)
+    subject.send_message_to_correct_recipient(clients, message, nil)
   end
 
   it "should nillify Chris's WSID if he disconnects" do
