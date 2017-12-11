@@ -7,6 +7,7 @@ describe CommsOperator do
   ]
 
   let(:subject) { CommsOperator.new(username_WSID_directory) }
+  json = '{"senderName": "Lucy", "receiverName": "", "text":"", "error":false}'  
 
   it 'adds new usernames to the username_WSID_directory' do
     subject.add_username('Lucy')
@@ -19,5 +20,9 @@ describe CommsOperator do
 
   it 'returns false if recipients name doesn\'t exist in the username_WSID_directory' do
     expect(subject.find_WSID('Chris')).to eq false
+  end
+
+  it 'should check whether message is to set up user with WSID directory' do
+    expect(subject.check_genuine_message(json)).to eq false
   end
 end

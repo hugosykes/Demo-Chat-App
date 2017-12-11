@@ -1,5 +1,16 @@
-[32m.[0m[32m.[0m[32m.[0m
+[32m.[0m[32m.[0m[32m.[0m[32m.[0m[31mF[0m
 
-Finished in 0.00241 seconds (files took 0.41926 seconds to load)
-[32m3 examples, 0 failures[0m
+Failures:
+
+  1) CommsOperator should add user to WSID directory if message isn't 'genuine'
+     [31mFailure/Error: [0m[32mexpect[0m { [32msubject[0m.check_genuine_message(json) }.to change { username_WSID_directory.length }.by([1;34m1[0m)[0m
+     [31m  expected `username_WSID_directory.length` to have changed by 1, but was changed by 0[0m
+     [36m# ./spec/comms_operator_spec.rb:30:in `block (2 levels) in <top (required)>'[0m
+
+Finished in 0.04805 seconds (files took 0.16943 seconds to load)
+[31m5 examples, 1 failure[0m
+
+Failed examples:
+
+[31mrspec ./spec/comms_operator_spec.rb:29[0m [36m# CommsOperator should add user to WSID directory if message isn't 'genuine'[0m
 
