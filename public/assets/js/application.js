@@ -6,6 +6,7 @@ $(document).ready(function() {
   var messages = [];
 
   ws.onmessage = function(message) {
+    console.log(message)
     var data = JSON.parse(message.data);
     $("#chat-text").append("<br><scan>"+ data.senderName + ' is saying ' + data.text + ' to ' + data.receiverName + '!');
   };
