@@ -14,11 +14,11 @@ $(document).ready(function() {
   function send() {
     var handle = $('#input-handle').val();
     var text = $("#input-text").val();
-    ws.send({
-      "senderName": handle,
-      "receiverName": handle,
-      "text": text
-    });
+    ws.send(JSON.stringify({
+      "senderName": handle, 
+      "receiverName": handle, 
+      text: text
+    }));
     $("#input-text").val('');
   }
 
