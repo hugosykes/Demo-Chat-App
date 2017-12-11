@@ -30,6 +30,7 @@ class CommsOperator
     return unless check_genuine_message(message, wsid)
     message = JSON.parse(message)
     ws_ids = [find_WSID(message["receiverName"]), find_WSID(message["senderName"])]
+    puts "ws_ids in send_to_correct" + ws_ids
     clients.each { |client| client.send(message) if ws_ids.include?(client.object_id) }
   end
 
