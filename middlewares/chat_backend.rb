@@ -23,8 +23,7 @@ module WhisperModule
 
         ws.on :message do |event|
           p 'event.data:', event.data
-          # @comms_operator.
-          @clients.each { |client| client.send(event.data) }
+          @comms_operator.send_message_to_correct_recipient(@clients, event.data)
         end
 
         ws.on :close do |event|
