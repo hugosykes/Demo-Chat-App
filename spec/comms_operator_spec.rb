@@ -15,7 +15,6 @@ describe CommsOperator do
   let(:clients) { [ws_correct, ws_incorrect]}
   
   message = {"senderName": "Ollie", "receiverName": "Chris", "text": "Hello", "error": false}  
-  json = '{"senderName": "Lucy", "receiverName": "", "text":"", "error":false}'  
   
   before (:each) do
     username_WSID_directory = [
@@ -24,7 +23,6 @@ describe CommsOperator do
       { name: 'Chris', WSID: 2 }
     ]
   end
-
 
   it 'adds new usernames to the username_WSID_directory' do
     subject.add_username('Lucy')
@@ -39,12 +37,17 @@ describe CommsOperator do
     expect(subject.find_WSID('Lucy')).to eq false
   end
 
-  it "should add user to WSID directory if message isn't 'genuine'" do
-    # NEEDS ANOTHER TEST
+  it "should add user to WSID directory if message isn't 'genuine'(text != '')" do
+    json = '{"senderName": "Lucy", "receiverName": "", "text":"", "error":false}'  
     expect { subject.check_genuine_message(json) }.to change { username_WSID_directory.length }.by(1)
   end
 
-  it 'should send message to Chris' do
+  it "should report that the message is true if it has text" do
+    json = '{"senderName": "Lucy", "receiverName": "", "text":"tarah!", "error":false}'  
+    expect(subject.check_genuine_message(json)).to eq true
+  end
+
+  it 'should send message to Chris if senderName is Chris' do
     expect(ws_correct).to receive(:send)
     subject.send_message_to_correct_recipient(clients, message)
   end

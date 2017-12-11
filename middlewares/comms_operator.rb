@@ -18,7 +18,11 @@ class CommsOperator
 
   def check_genuine_message(json)
     parsed_json = JSON.parse(json)
-    add_username(parsed_json['senderName']) if parsed_json['text'] == ""
+    if parsed_json['text'] == ""
+      add_username(parsed_json['senderName'])
+      return false
+    end
+    true
   end
 
   def send_message_to_correct_recipient(clients, message)

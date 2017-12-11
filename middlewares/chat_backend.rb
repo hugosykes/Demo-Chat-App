@@ -24,8 +24,7 @@ module WhisperModule
 
         ws.on :message do |event|
           p 'event.data:', event.data
-          # IF MESSAGE IS BLANK THEN ASSIGN WS_OBJECTID TO THIS USER
-          # if the client's username matches the receiverName then it should receive the message
+          # @comms_operator
           @clients.each { |client| client.send(event.data) }
         end
 
