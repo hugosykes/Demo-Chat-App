@@ -9,7 +9,6 @@ module WhisperModule
       @comms_operator = CommsOperator.new
       @app = app
       @clients = []
-      @username_WSID_directory = []
     end
 
     def call(env)
@@ -24,7 +23,7 @@ module WhisperModule
 
         ws.on :message do |event|
           p 'event.data:', event.data
-          # @comms_operator
+          # @comms_operator.
           @clients.each { |client| client.send(event.data) }
         end
 

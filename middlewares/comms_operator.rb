@@ -18,17 +18,18 @@ class CommsOperator
 
   def check_genuine_message(json)
     parsed_json = JSON.parse(json)
-    if parsed_json['text'] == ""
-      add_username(parsed_json['senderName'])
+    if parsed_json["text"] == ""
+      add_username(parsed_json["senderName"])
       return false
     end
     true
   end
 
   def send_message_to_correct_recipient(clients, message)
-    receiver = message[:receiverName]
-    wsid = find_WSID(receiver)
-    clients.each { |client| client.send(message) if client.object_id == wsid }
+    return unless check_genuine_message(message)
+    message = JSON.parse(message)
+    ws_ids = [find_WSID(message["receiverName"]), find_WSID(message["senderName"])]
+    clients.each { |client| client.send(message) if ws_ids.include?(client.object_id) }
   end
 
   def disconnects(name)
