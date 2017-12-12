@@ -40,6 +40,7 @@ describe CommsOperator do
   it "should add user to WSID directory if message isn't 'genuine' (text != '')" do
     json = '{"senderName": "Lucy", "receiverName": "", "text":"", "error":false}'
     expect { subject.check_genuine_message(json, nil) }.to change { username_WSID_directory.length }.by(1)
+    expect { subject.check_genuine_message(json, nil) }.to change { username_WSID_directory.length }.by(0)
   end
 
   it "should report that the message is true if it has text" do
@@ -53,7 +54,7 @@ describe CommsOperator do
   end
 
   it "should nillify Chris's WSID if he disconnects" do
-    subject.disconnects('Chris')
+    subject.disconnects(2)
     expect(username_WSID_directory[2]["Chris"]).to eq nil
   end
 end

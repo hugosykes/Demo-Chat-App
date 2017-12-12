@@ -45,7 +45,7 @@ class CommsOperator
     end
   end
 
-  def disconnects(name)
-    @username_WSID_directory.each { |user| user[:WSID] = nil if user[:name] == name }
+  def disconnects(wsid)
+    @username_WSID_directory.each { |user| user[:WSID] = nil if user[:WSID] == wsid }
   end
 end
