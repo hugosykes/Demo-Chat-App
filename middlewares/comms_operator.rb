@@ -5,8 +5,13 @@ class CommsOperator
   end
 
   def add_username(name, id)
-    @username_WSID_directory.each {|user| p "BEFORE METHOD user: ", user[:name], ", and object_id: ", user[:WSID]}    
-    @username_WSID_directory.each { |user| return if !user[:name] }
+    @username_WSID_directory.each { |user| p "BEFORE METHOD user: ", user[:name], ", and object_id: ", user[:WSID]}    
+    @username_WSID_directory.each do |user|
+      if user[:name] == name
+        user[:WSID] = id
+        return
+      end
+    end
     @username_WSID_directory.push({
       name: name, 
       WSID: id
