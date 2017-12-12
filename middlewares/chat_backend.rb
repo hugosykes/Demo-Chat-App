@@ -23,13 +23,13 @@ module WhisperModule
 
         ws.on :message do |event|
           p 'event.data:', event.data
-          @comms_operator.send_message_to_correct_recipient(@clients, event.data, ws)
+          @clients.each { |client| client.send(event.data) }
+          # @comms_operator.send_message_to_correct_recipient(@clients, event.data, ws)
         end
 
         ws.on :close do |event|
           p [:close, ws.object_id, event.code, event.reason]
           @clients.delete(ws)
-          # @comms_operator.disconnect(ws.object_id)
           ws = nil
         end
 
