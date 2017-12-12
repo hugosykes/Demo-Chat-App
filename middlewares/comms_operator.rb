@@ -26,16 +26,12 @@ class CommsOperator
     true
   end
 
-  def send_message_to_correct_recipient(clients, message, wsid)
-    return unless check_genuine_message(message, wsid)
+  def send_message_to_correct_recipient(clients, message, ws)
+    return unless check_genuine_message(message, ws.object_id)
+    clients << ws
     message = JSON.parse(message)
     ws_ids = [find_WSID(message["receiverName"]), find_WSID(message["senderName"])]
-    clients.each do |client|
-      if ws_ids.include?(client.object_id)
-        client.send(message.to_s)
-        # @username_WSID_directory.each { |user| p user[:name] if user[:WSID] == client.object_id }
-      end
-    end
+    clients.each { |client| client.send(message.to_s) if ws_ids.include?(client.object_id) }
   end
 
   def disconnects(name)
