@@ -27,8 +27,8 @@ class CommsOperator
   end
 
   def send_message_to_correct_recipient(clients, message, ws)
+    clients << ws    
     return unless check_genuine_message(message, ws.object_id)
-    clients << ws
     message = JSON.parse(message)
     ws_ids = [find_WSID(message["receiverName"]), find_WSID(message["senderName"])]
     clients.each { |client| client.send(message.to_s) if ws_ids.include?(client.object_id) }
