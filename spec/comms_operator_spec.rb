@@ -9,7 +9,7 @@ describe CommsOperator do
   ]
   
   let(:subject) { CommsOperator.new(username_WSID_directory) }
-
+  
   let(:ws_incorrect) { double :ws, object_id: 1, send: nil}
   let(:ws_correct) { double :ws, object_id: 2, send: nil}
   let(:clients) { [ws_correct, ws_incorrect]}
