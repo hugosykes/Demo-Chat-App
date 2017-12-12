@@ -27,12 +27,10 @@ class CommsOperator
   end
 
   def send_message_to_correct_recipient(clients, message, ws)
-    clients << ws    
     return unless check_genuine_message(message, ws.object_id)
-    message = JSON.parse(message)
-    ws_ids = [find_WSID(message["receiverName"]), find_WSID(message["senderName"])]
-    clients.each { |client| p client.object_id }
-    clients.each { |client| client.send(message.to_s) if ws_ids.include?(client.object_id) }
+    message_parsed = JSON.parse(message)
+    ws_ids = [find_WSID(message_parsed["receiverName"]), find_WSID(message_parsed["senderName"])]
+    clients.each { |client| client.send(message) if ws_ids.include?(client.object_id) }
   end
 
   def disconnects(name)
