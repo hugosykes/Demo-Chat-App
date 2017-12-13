@@ -29,6 +29,7 @@ module WhisperModule
 
         ws.on :close do |event|
           p [:close, ws.object_id, event.code, event.reason]
+          @comms_operator.disconnects(ws.object_id)
           @clients.delete(ws)
           ws = nil
         end
