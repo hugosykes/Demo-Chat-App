@@ -37,9 +37,7 @@ class CommsOperator
   def send_message_to_correct_recipient(clients, message, ws)
     return unless check_genuine_message(message, ws.object_id)
     parsed_message = JSON.parse(message)
-    ws_ids = [find_WSID(parsed_message["receiverName"])]
-    ws_ids.push(find_WSID(parsed_message["senderName"])) if !ws_ids[0]
-    clients.each { |client| client.send(message) if ws_ids.include?(client.object_id) }
+    clients.each { |client| client.send(message) if find_WSID(parsed_message["senderName"]) == client.object_id }
     clients.each do |client|
       (p "client.object_id upon sending: ", client.object_id) if ws_ids.include?(client.object_id)
     end
