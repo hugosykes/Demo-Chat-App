@@ -38,9 +38,6 @@ class CommsOperator
     return unless check_genuine_message(message, ws.object_id)
     parsed_message = JSON.parse(message)
     clients.each { |client| client.send(message) if find_WSID(parsed_message["senderName"]) == client.object_id }
-    clients.each do |client|
-      (p "client.object_id upon sending: ", client.object_id) if ws_ids.include?(client.object_id)
-    end
   end
 
   def disconnects(wsid)
